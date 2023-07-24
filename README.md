@@ -32,3 +32,26 @@ $ docker-compose run web ./manage.py createsuperuser
 `ALLOWED_HOSTS` -- настройка Django со списком разрешённых адресов. Если запрос прилетит на другой адрес, то сайт ответит ошибкой 400. Можно перечислить несколько адресов через запятую, например `127.0.0.1,192.168.0.1,site.test`. [Документация Django](https://docs.djangoproject.com/en/3.2/ref/settings/#allowed-hosts).
 
 `DATABASE_URL` -- адрес для подключения к базе данных PostgreSQL. Другие СУБД сайт не поддерживает. [Формат записи](https://github.com/jacobian/dj-database-url#url-schema).
+
+## Деплой с помощью Kubernetes
+
+Перед деплоем необходимо прописать переменные окружения в файле django-config.yaml:
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: django-config
+  labels:
+    app: django
+    tier: django
+data:
+  SECRET_KEY: ""
+  DEBUG: ""
+  DATABASE_URL: ""
+  ALLOWED_HOSTS: ""
+```
+Далее выполнить команду:
+```
+kubectl apply -f django-config.yaml
+```
+Команда запустит Deployment и Service. 

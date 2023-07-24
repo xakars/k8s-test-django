@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: django-deployment
+  labels:
+    app: django
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: django
+  template:
+    metadata:
+      labels:
+        app: django
+    spec:
+      containers:
+        - name: django
+          image: django_app
+          envFrom:
+            - configMapRef:
+                name: django-config 
+          ports:
+            - containerPort: 80
+          imagePullPolicy: Never
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: django-service 
+  labels:
+    env: prod
+    owner: ArsHak
+spec:
+  selector:
+    app: django
+  ports:
+    - name: app-listiner
+      protocol: TCP
+      port: 80
+      targetPort: 80
+  type: NodePort
