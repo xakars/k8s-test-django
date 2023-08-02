@@ -50,8 +50,18 @@ data:
   DATABASE_URL: ""
   ALLOWED_HOSTS: ""
 ```
-Далее выполнить команду:
+Далее выполнить команду ниже, чтобы применить их:
 ```
 kubectl apply -f django-config.yaml
 ```
-Команда запустит Deployment и Service. 
+Далее для запуска Deployment и Service выполните команду: 
+```
+kubectl apply -f django-deployment.yaml
+```
+Для доступа web-сервиса с "наружи" пропишите необходимые данные в файле `ingress-hosts.yaml`, а именно:
+```yaml
+host: "доменное имя"
+...
+service:
+  name: "имя сервиса"
+```
