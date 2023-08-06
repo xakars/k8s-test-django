@@ -1,0 +1,20 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: django-management
+spec:
+  template:
+    spec:
+      containers:
+      - name: make-migrate
+        image: django_app
+        envFrom:
+          - configMapRef:
+              name: django-config
+        imagePullPolicy: Never
+        command:
+          - /bin/sh
+          - -c
+          - python manage.py migrate --noinput
+      restartPolicy: Never
+  backoffLimit: 4
