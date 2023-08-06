@@ -20,3 +20,5 @@ spec:
             - -c
             - python manage.py clearsessions
           restartPolicy: OnFailure
+          ttlSecondsAfterFinished: 20
+          startingDeadlineSeconds: 100
