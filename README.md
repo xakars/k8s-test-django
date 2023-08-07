@@ -69,3 +69,7 @@ service:
 ```
 kubectl create -f cronjob.yaml
 ```
+Для применения миграций выполните job из файла `management_job.yaml`:
+```
+kubectl apply -f management_job.yaml 
+```
