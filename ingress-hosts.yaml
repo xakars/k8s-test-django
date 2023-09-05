@@ -4,14 +4,14 @@ metadata:
   name: web-ingress
   annotations:
     kubernetes.io/ingress.class: gce
-    kubernetes.io/ingress.allow-http: "true"
+    kubernetes.io/ingress.allow-http: "false"
     kubernetes.io/ingress.global-static-ip-name: web-ip
     cert-manager.io/issuer: letsencrypt-staging
 spec:
   tls:
     - secretName: web-ssl
       hosts:
-        - "arsxak.ru"
+        - arsxak.ru
   defaultBackend:
     service:
       name: django-service
