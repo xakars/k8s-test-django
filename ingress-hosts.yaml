@@ -1,18 +1,19 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: ingress-hosts
-
+  name: web-ingress
+  annotations:
+    kubernetes.io/ingress.class: gce
+    kubernetes.io/ingress.allow-http: "true"
+    kubernetes.io/ingress.global-static-ip-name: web-ip
+    cert-manager.io/issuer: letsencrypt-staging
 spec:
-  rules:
-  - host: star-burger.test
-    http:
-      paths:
-        - path: /
-          pathType: Prefix
-          backend:
-            service:
-              name: django-service
-              port:
-                number: 80
-
+  tls:
+    - secretName: web-ssl
+      hosts:
+        - "arsxak.ru"
+  defaultBackend:
+    service:
+      name: django-service
+      port:
+        number: 80

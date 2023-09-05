@@ -10,7 +10,7 @@ spec:
         spec:
           containers:
           - name: session-cleaner
-            image: django_app
+            image: jomanocob/django_app:latest
             envFrom:
               - configMapRef:
                   name: django-config

@@ -7,10 +7,10 @@ spec:
     spec:
       containers:
       - name: make-migrate
-        image: django_app
+        image: jomanocob/django_app:latest
         envFrom:
           - configMapRef:
-              name: django-config
+              name: django-config-v6
         imagePullPolicy: Never
         command:
           - /bin/sh
