@@ -1,4 +1,9 @@
 # Django site
+Сайт заделоен по адресу [arsxak.ru](https://arsxak.ru).
+Использовалось Google Cloud Platform (GKE)
+
+Выделенные ресурсы:
+![img.png](img.png)
 
 Докеризированный сайт на Django для экспериментов с Kubernetes.
 
